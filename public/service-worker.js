@@ -4,7 +4,7 @@ const FILES_TO_CACHE = [
   "/",
   "/index.html",
   "/styles.css",
-  "db.js",
+  "/db.js",
   "/index.js",
   "/manifest.webmanifest",
   "/icons/icon-192x192.png",
@@ -15,7 +15,9 @@ const FILES_TO_CACHE = [
 self.addEventListener("install", function(evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.add("/api/transaction");
+      console.log("Successfully installed service worker")
+      cache.addAll(FILES_TO_CACHE);
+      // return cache.add("/api/transaction");
     })
   );
 
@@ -36,7 +38,7 @@ self.addEventListener("activate", function(evt) {
     })
   );
 
-  self.clients.claim();
+  // self.clients.claim();
 });
 
 // fetch
